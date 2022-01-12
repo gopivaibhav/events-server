@@ -1,0 +1,31 @@
+{
+  "name": "events-server",
+  "version": "1.0.0",
+  "description": "server for IIITL Events website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gopivaibhav/events-server.git"
+  },
+  "author": "Gopi Vaibhav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gopivaibhav/events-server/issues"
+  },
+  "homepage": "https://github.com/gopivaibhav/events-server#readme",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.6",
+    "multer": "^1.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
