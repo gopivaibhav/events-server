@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 // Routes
 const registerRoute=require('./routes/register')
 const loginRoute=require('./routes/login')
+const auth=require('./routes/auth')
 app.use('/register',registerRoute)
 app.use('/login',loginRoute)
 
@@ -21,5 +22,9 @@ app.get('/',(req,res)=>{
     res.send('Hello');
 })
 
+
+app.get('/check',auth,(req,res)=>{
+    res.send(req.userId);
+})
 const port=process.env.PORT
 app.listen(port,()=>{console.log(`listening on ${port}`)});
