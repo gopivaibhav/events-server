@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express= require('express');
+const cors = require('cors');
 const app=express();
 const mongoose=require('mongoose');
 mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true,useUnifiedTopology: true }).then(res=>{
@@ -7,13 +8,16 @@ mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true,useUnifiedTopolog
 })
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+app.use(cors());
 
 // Routes
 const registerRoute=require('./routes/register')
 const loginRoute=require('./routes/login')
+const peopleRoute=require('./routes/people')
 const auth=require('./routes/auth')
 app.use('/register',registerRoute)
 app.use('/login',loginRoute)
+app.use('/people',peopleRoute)
 
 
 

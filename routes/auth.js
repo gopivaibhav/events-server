@@ -6,9 +6,14 @@ const auth=(req,res,next)=>{
         if(!token){
             res.status(403).send("Access denied.");
         }else{
-            const userId=jwt.verify(token,process.env.JWT_SECRET)
-            req.userId=userId
-            next()
+            if(token===process.env.AUTH_SECRET){
+                req.userId='Google'
+                next()
+            }else{
+                const userId=jwt.verify(token,process.env.JWT_SECRET)
+                req.userId=userId
+                next()
+            }
         }
     } catch (error) {
         res.status(400).send('Invalid token')
