@@ -11,6 +11,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 
 // Routes
+// app.get('/people/me',(req,res)=>{
+//     res.send('buhahhaha')
+// })
 const registerRoute=require('./routes/register')
 const loginRoute=require('./routes/login')
 const peopleRoute=require('./routes/people')
@@ -27,8 +30,6 @@ app.get('/',(req,res)=>{
 })
 
 
-app.get('/check',auth,(req,res)=>{
-    res.send(req.userId);
-})
+
 const port=process.env.PORT
 app.listen(port,()=>{console.log(`listening on ${port}`)});

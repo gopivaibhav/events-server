@@ -4,19 +4,19 @@ const auth=(req,res,next)=>{
     try {
         const token=req.header('auth-token')
         if(!token){
-            res.status(403).send("Access denied.");
+            res.send("Access denied.");
         }else{
             if(token===process.env.AUTH_SECRET){
                 req.userId='Google'
-                next()
+                next();
             }else{
                 const userId=jwt.verify(token,process.env.JWT_SECRET)
                 req.userId=userId
-                next()
+                next();
             }
         }
     } catch (error) {
-        res.status(400).send('Invalid token')
+        res.send('Invalid token')
     }
 }
 
