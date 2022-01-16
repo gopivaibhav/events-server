@@ -15,6 +15,12 @@ const userSchema=mongoose.Schema({
     },
     password:{
         type: String,
-    }
+    },
+    imageUrl:{
+        type: String,
+    },
+    googleId:{
+        type: String,
+    },
 })
 module.exports = mongoose.model('User',userSchema)

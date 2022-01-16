@@ -8,13 +8,13 @@ router.post('/',async(req,res)=>{
             email:req.body.email
         })
         if(user[0]===undefined){
-            res.status(404).send('No email found')
+            res.send({'error':"No user found"})
         }else{
             if(user[0].password===req.body.password){
                 const token=jwt.sign({_id:user[0]._id},process.env.JWT_SECRET)
                 res.send(token)
             }else{
-                res.status(401).send('Wrong Password')
+                res.send({'error':"Wrong Password"})
             }
         }
     } catch (e) {
