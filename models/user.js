@@ -22,5 +22,6 @@ const userSchema=mongoose.Schema({
     googleId:{
         type: String,
     },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }]
 })
 module.exports = mongoose.model('User',userSchema)

@@ -17,10 +17,11 @@ app.use(cors());
 const registerRoute=require('./routes/register')
 const loginRoute=require('./routes/login')
 const peopleRoute=require('./routes/people')
-const auth=require('./routes/auth')
+const adminRoute=require('./routes/admin')
 app.use('/register',registerRoute)
 app.use('/login',loginRoute)
 app.use('/people',peopleRoute)
+app.use('/admin',adminRoute)
 
 
 
