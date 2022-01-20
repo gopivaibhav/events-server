@@ -18,10 +18,12 @@ const registerRoute=require('./routes/register')
 const loginRoute=require('./routes/login')
 const peopleRoute=require('./routes/people')
 const adminRoute=require('./routes/admin')
+const userRoute=require('./routes/user')
 app.use('/register',registerRoute)
 app.use('/login',loginRoute)
 app.use('/people',peopleRoute)
 app.use('/admin',adminRoute)
+app.use('/user',userRoute)
 
 
 
