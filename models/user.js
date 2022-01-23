@@ -22,6 +22,10 @@ const userSchema=mongoose.Schema({
     googleId:{
         type: String,
     },
-    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }]
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }],
+    friends: [{ type: String}],
+    skills:[{
+        type:String
+    }]
 })
 module.exports = mongoose.model('User',userSchema)

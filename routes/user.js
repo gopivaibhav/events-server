@@ -1,7 +1,38 @@
 const router = require('express').Router()
 const chatModel = require('../models/chat')
+const userModel = require('../models/user')
 const auth=require('./auth')
 
+router.post('/addfrnd',auth, async (req, res) => {
+    try{
+        let obj=await userModel.find({_id:req.userId._id})
+        obj[0].friends.push(req.body.frnd)
+        res.send("Added friend")
+    }catch(e){
+        console.log(e);
+    }
+})
+
+router.post('/unfrnd',auth, async (req, res) => {
+    try{
+        let obj=await userModel.find({_id:req.userId._id})
+        obj[0].friends=obj[0].friends.filter(check=>{
+            return check!==req.body.frnd
+        })
+        res.send('Unfriended')
+    }catch(e){
+        console.log(e);
+    }
+})
+router.get('/getfrnds',auth,async(req,res)=>{
+    try{
+        let obj=await userModel.find({_id:req.userId._id})
+        console.log(obj[0].friends)
+        res.send(obj[0].friends)
+    }catch(e){
+        console.log(e);
+    }
+})
 router.post('/msg',auth, async (req, res) => {
     try {
         const chatObj = new chatModel({
@@ -13,8 +44,21 @@ router.post('/msg',auth, async (req, res) => {
         await chatObj.save()
         res.send(chatObj)
     } catch (err) {
-        console.log(err)
         res.send(err)
+    }
+})
+
+
+router.post('/edit',auth,async(req,res)=>{
+    try{
+        let obj=await userModel.findOneAndUpdate({_id:req.userId._id},{
+            fName:req.body.fName,
+            lName:req.body.lName,
+            skills:req.body.skills
+        },{new:true})
+        res.send('updated succesfully')
+    }catch(e){
+        res.send(e)
     }
 })
 
