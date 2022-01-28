@@ -1,43 +1,43 @@
 const router = require('express').Router()
 const chatModel = require('../models/chat')
 const userModel = require('../models/user')
-const auth=require('./auth')
+const auth = require('./auth')
 
-router.post('/addfrnd',auth, async (req, res) => {
-    try{
-        let obj=await userModel.find({_id:req.userId._id})
+router.post('/addfrnd', auth, async (req, res) => {
+    try {
+        let obj = await userModel.find({ _id: req.userId._id })
         obj[0].friends.push(req.body.frnd)
         res.send("Added friend")
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 })
 
-router.post('/unfrnd',auth, async (req, res) => {
-    try{
-        let obj=await userModel.find({_id:req.userId._id})
-        obj[0].friends=obj[0].friends.filter(check=>{
-            return check!==req.body.frnd
+router.post('/unfrnd', auth, async (req, res) => {
+    try {
+        let obj = await userModel.find({ _id: req.userId._id })
+        obj[0].friends = obj[0].friends.filter(check => {
+            return check !== req.body.frnd
         })
         res.send('Unfriended')
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 })
-router.get('/getfrnds',auth,async(req,res)=>{
-    try{
-        let obj=await userModel.find({_id:req.userId._id})
+router.get('/getfrnds', auth, async (req, res) => {
+    try {
+        let obj = await userModel.find({ _id: req.userId._id })
         console.log(obj[0].friends)
         res.send(obj[0].friends)
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 })
-router.post('/msg',auth, async (req, res) => {
+router.post('/msg', auth, async (req, res) => {
     try {
         const chatObj = new chatModel({
             sender: req.body.sender,
-            personId:req.userId._id,
+            personId: req.userId._id,
             msg: req.body.msg,
             time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false })
         })
@@ -49,29 +49,43 @@ router.post('/msg',auth, async (req, res) => {
 })
 
 
-router.post('/edit',auth,async(req,res)=>{
-    try{
-        let obj=await userModel.findOneAndUpdate({_id:req.userId._id},{
-            fName:req.body.fName,
-            lName:req.body.lName,
-            skills:req.body.skills
-        },{new:true})
+router.post('/edit', auth, async (req, res) => {
+    try {
+        let obj = await userModel.findOneAndUpdate({ _id: req.userId._id }, {
+            fName: req.body.fName,
+            lName: req.body.lName,
+            skills: req.body.skills
+        }, { new: true })
         res.send('updated succesfully')
-    }catch(e){
+    } catch (e) {
         res.send(e)
     }
 })
 
 router.get('/view', auth, async (req, res) => {
     try {
-        const getObj = await chatModel.find({ personId:req.userId._id }).populate({ path: 'personId', select: ['fName', 'lName'] })
-        if(getObj.length==0){
+        // const getObj = await chatModel.find({ personId: req.userId._id }).populate({ path: 'personId', select: ['fName', 'lName'] })
+        const getObj = await chatModel.find({ personId: req.userId._id })
+        if (getObj.length == 0) {
             res.send('NTG')
-        }else{
+        } else {
             res.send(getObj)
         }
     } catch (error) {
         res.send(error)
+    }
+})
+
+router.post('/form',auth, async (req, res) => {
+    try {
+        console.log(req.body.value)
+        let obj = await userModel.findOneAndUpdate({ _id: req.userId._id }, {
+            filledForm:req.body.value
+        }, { new: true })
+        console.log(obj)
+        res.send('voted succesfully')
+    } catch (e) {
+        res.send(e)
     }
 })
 

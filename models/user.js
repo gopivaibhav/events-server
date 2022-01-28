@@ -26,6 +26,10 @@ const userSchema=mongoose.Schema({
     friends: [{ type: String}],
     skills:[{
         type:String
-    }]
+    }],
+    filledForm:{
+        type:String,
+        default:''
+    }
 })
 module.exports = mongoose.model('User',userSchema)
