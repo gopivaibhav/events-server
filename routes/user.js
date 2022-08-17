@@ -24,15 +24,16 @@ router.post('/unfrnd', auth, async (req, res) => {
         console.log(e);
     }
 })
+
 router.get('/getfrnds', auth, async (req, res) => {
     try {
         let obj = await userModel.find({ _id: req.userId._id })
-        console.log(obj[0].friends)
         res.send(obj[0].friends)
     } catch (e) {
         console.log(e);
     }
 })
+
 router.post('/msg', auth, async (req, res) => {
     try {
         const chatObj = new chatModel({
@@ -47,7 +48,6 @@ router.post('/msg', auth, async (req, res) => {
         res.send(err)
     }
 })
-
 
 router.post('/edit', auth, async (req, res) => {
     try {
@@ -76,17 +76,16 @@ router.get('/view', auth, async (req, res) => {
     }
 })
 
-router.post('/form',auth, async (req, res) => {
+router.post('/form', auth, async (req, res) => {
     try {
-        console.log(req.body.value)
         let obj = await userModel.findOneAndUpdate({ _id: req.userId._id }, {
-            filledForm:req.body.value
+            filledForm: req.body.value
         }, { new: true })
-        console.log(obj)
         res.send('voted succesfully')
     } catch (e) {
         res.send(e)
     }
 })
+
 
 module.exports = router

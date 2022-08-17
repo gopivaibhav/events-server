@@ -1,35 +1,35 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
-const userSchema=mongoose.Schema({
-    fName:{
-        type:String,
-        required:true 
-    },
-    lName:{
-        type:String,
-        required:true 
-    },
-    email:{
+const userSchema = mongoose.Schema({
+    fName: {
         type: String,
-        required:true 
+        required: true
     },
-    password:{
+    lName: {
         type: String,
+        required: true
     },
-    imageUrl:{
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
     },
-    googleId:{
+    imageUrl: {
+        type: String,
+    },
+    googleId: {
         type: String,
     },
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }],
-    friends: [{ type: String}],
-    skills:[{
-        type:String
+    friends: [{ type: String }],
+    skills: [{
+        type: String
     }],
-    filledForm:{
-        type:String,
-        default:''
+    filledForm: {
+        type: String,
+        default: ''
     }
 })
-module.exports = mongoose.model('User',userSchema)
+module.exports = mongoose.model('User', userSchema)
