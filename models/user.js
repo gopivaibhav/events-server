@@ -32,4 +32,5 @@ const userSchema = mongoose.Schema({
         default: ''
     }
 })
+
 module.exports = mongoose.model('User', userSchema)
