@@ -19,12 +19,14 @@ const loginRoute = require('./routes/login')
 const peopleRoute = require('./routes/people')
 const adminRoute = require('./routes/admin')
 const userRoute = require('./routes/user')
+const feedRoute = require('./routes/feed')
 
 app.use('/register', registerRoute)
 app.use('/login', loginRoute)
 app.use('/people', peopleRoute)
 app.use('/admin', adminRoute)
 app.use('/user', userRoute)
+app.use('/feeds', feedRoute)
 
 
 app.get('/', (req, res) => {
