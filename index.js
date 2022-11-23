@@ -20,12 +20,14 @@ const peopleRoute = require('./routes/people')
 const adminRoute = require('./routes/admin')
 const userRoute = require('./routes/user')
 const feedRoute = require('./routes/feed')
+const textingRoute = require('./routes/texting')
 
 app.use('/register', registerRoute)
 app.use('/login', loginRoute)
 app.use('/people', peopleRoute)
 app.use('/admin', adminRoute)
 app.use('/user', userRoute)
+app.use('/texting', textingRoute)
 app.use('/feeds', feedRoute)
 
 
